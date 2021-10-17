@@ -1,0 +1,276 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API для блога на Node.js",
+    "version": "v1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    }
+  ],
+  "tags": [
+    {
+      "name": "API записей",
+      "description": "API для блога"
+    },
+    {
+      "name": "API авторизации",
+      "description": "API для авторизации на блоге"
+    }
+  ],
+  "paths": {
+    "/api/posts": {
+      "get": {
+        "summary": "возвращает записи из блога",
+        "tags": [
+          "API записей"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "description": "номер страницы",
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "document": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "success": true,
+                    "totalPages": 2,
+                    "currentPage": 2,
+                    "countPosts": 8,
+                    "data": {
+                      "_id": "616c585159e401788e1bbbe7",
+                      "message": "5",
+                      "author": "6169bc84d27e8df781597b81",
+                      "media": [],
+                      "createdAt": "2021-10-17T17:07:29.801Z",
+                      "updatedAt": "2021-10-17T17:07:29.801Z",
+                      "__v": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "добавляет новую запись в блог",
+        "tags": [
+          "API записей"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "message": "test message"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "description": "JWT token",
+            "schema": {
+              "type": "string",
+              "example": "123"
+            }
+          }
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "summary": "изменяет запись в блоге",
+        "tags": [
+          "API записей"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "message": "new test message",
+                "_id": "1"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "description": "JWT token",
+            "schema": {
+              "type": "string",
+              "example": "123"
+            }
+          }
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "удаляет запись в блоге",
+        "tags": [
+          "API записей"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "_id": "1"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "description": "JWT token",
+            "schema": {
+              "type": "string",
+              "example": "123"
+            }
+          }
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "авторизация в блоге",
+        "tags": [
+          "API авторизации"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserInput"
+              },
+              "example": {
+                "login": "admin",
+                "password": "admin"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "UserInput",
+            "in": "body",
+            "required": true,
+            "description": "Логин и пароль пользователя",
+            "schema": {
+              "$ref": "#/components/schemas/UserInput"
+            }
+          }
+        ],
+        "description": "тестовые данные для входа",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "summary": "регистрация в блоге",
+        "tags": [
+          "API авторизации"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserInput"
+              },
+              "example": {
+                "login": "admin",
+                "password": "admin"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "UserInput",
+            "in": "body",
+            "required": true,
+            "description": "Логин и пароль пользователя",
+            "schema": {
+              "$ref": "#/components/schemas/UserInput"
+            }
+          }
+        ],
+        "description": "тестовые данные для входа",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserInput": {
+        "type": "object",
+        "properties": {
+          "login": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
