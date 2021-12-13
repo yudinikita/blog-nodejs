@@ -56,10 +56,10 @@ JWT_SECRET=
 
 ```shell
 # development
-npm server:watch
+npm run server:watch
 
 # production
-npm start
+npm run start
 ```
 
 ### Лицензия
