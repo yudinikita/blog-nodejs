@@ -13,12 +13,54 @@
 4) Автор записи может редактировать или удалять запись
 5) Написана документаця к эндпоинтам (Swagger/OpenAPI)
 
-### Технологии
+## Технологии
 
 - Express
 - MongoDB
 - Mongoose
 - TypeScript
+
+## Начало работы
+
+Скопируйте репозиторий и установите зависимости
+
+```shell
+git clone https://github.com/nblackninja/blog-nodejs
+cd blog-nodejs
+npm install
+```
+
+Создайте файл .env в папке src и установите переменные среды
+
+```shell
+# development или production 
+NODE_ENV=development
+
+# Порт HTTP соединения, default = 5000
+PORT=5000
+
+# Server address
+BASE_URL=http://localhost
+
+# Адресс для подключения к MongoDB
+MONGO_URI=
+
+# Путь к папке сохранения изображений при загрузки на сервер
+FILE_PATH=
+
+# Секретная строка для генерации токена доступа
+JWT_SECRET=
+```
+
+Запустите сервер
+
+```shell
+# development
+npm server:watch
+
+# production
+npm start
+```
 
 ### Лицензия
 
